@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Открываем Technodom…</title>
+
+  <style>
+    body {
+      margin: 0;
+      padding: 40px 20px;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;
+      text-align: center;
+      background: #ffffff;
+      color: #333;
+    }
+    #fallback {
+      display: none;
+      margin-top: 20px;
+    }
+    button {
+      padding: 12px 20px;
+      font-size: 17px;
+      border-radius: 10px;
+      border: none;
+      background: #ff6f00;
+      color: white;
+      cursor: pointer;
+    }
+  </style>
+
+  <script>
+    document.addEventListener("DOMContentLoaded", function () {
+      const target = "https://www.technodom.kz/cms/discount10";
+
+      // Detect iOS device
+      const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent);
+
+      // Detect Safari
+      const isSafari = (() => {
+        const ua = navigator.userAgent.toLowerCase();
+        return ua.includes("safari") && !ua.includes("crios") && !ua.includes("fxios");
+      })();
+
+      // Detect WKWebView (iOS but NOT Safari)
+      const isIOSWebView = isIOS && !isSafari;
+
+      if (isIOSWebView) {
+        // WK-1: No auto-open → show button immediately
+        document.getElementById("fallback").style.display = "block";
+      } else {
+        // Instant redirect for Android + Safari iOS + Telegram iOS
+        window.location.replace(target);
+
+        // Show fallback only if redirect gets blocked
+        setTimeout(() => {
+          if (!document.hidden) {
+            document.getElementById("fallback").style.display = "block";
+          }
+        }, 1500);
+      }
+    });
+  </script>
+</head>
+
+<body>
+  <h2>Открываем Technodom…</h2>
+  <p>Если приложение не открылось автоматически, нажмите кнопку ниже.</p>
+
+  <div id="fallback">
+    <button onclick="window.location.href='https://www.technodom.kz/cms/discount10'">
+      Открыть в приложении Technodom
+    </button>
+  </div>
+</body>
+</html>
