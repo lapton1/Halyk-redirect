@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Открываем Technodom…</title>
+  <title>Открываем Halyk…</title>
 
   <style>
     body {
@@ -12,7 +12,7 @@
       font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;
       text-align: center;
       background: #ffffff;
-      color: #333;
+      color: #333333;
     }
     #fallback {
       display: none;
@@ -23,36 +23,37 @@
       font-size: 17px;
       border-radius: 10px;
       border: none;
-      background: #ff6f00;
-      color: white;
+      background: #0a9b8a; /* Halyk teal */
+      color: #ffffff;
       cursor: pointer;
     }
   </style>
 
   <script>
     document.addEventListener("DOMContentLoaded", function () {
-      const target = "https://www.technodom.kz/cms/discount10";
+      const target = "https://homebank.kz/partners/airbafresh?url=https://airbafresh.kz";
 
-      // Detect iOS device
+      // Detect iOS
       const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent);
 
-      // Detect Safari
+      // Detect Safari on iOS
       const isSafari = (() => {
         const ua = navigator.userAgent.toLowerCase();
         return ua.includes("safari") && !ua.includes("crios") && !ua.includes("fxios");
       })();
 
-      // Detect WKWebView (iOS but NOT Safari)
+      // iOS WKWebView = iOS but not Safari
       const isIOSWebView = isIOS && !isSafari;
 
       if (isIOSWebView) {
-        // WK-1: No auto-open → show button immediately
+        // WK-1: do NOT auto-redirect
+        // Always show button
         document.getElementById("fallback").style.display = "block";
       } else {
-        // Instant redirect for Android + Safari iOS + Telegram iOS
+        // Android + iOS Safari → instant redirect
         window.location.replace(target);
 
-        // Show fallback only if redirect gets blocked
+        // Safety fallback (network / blocked redirect)
         setTimeout(() => {
           if (!document.hidden) {
             document.getElementById("fallback").style.display = "block";
@@ -64,12 +65,12 @@
 </head>
 
 <body>
-  <h2>Открываем Technodom…</h2>
+  <h2>Открываем Halyk…</h2>
   <p>Если приложение не открылось автоматически, нажмите кнопку ниже.</p>
 
   <div id="fallback">
-    <button onclick="window.location.href='https://www.technodom.kz/cms/discount10'">
-      Открыть в приложении Technodom
+    <button onclick="window.location.href='https://homebank.kz/partners/airbafresh?url=https://airbafresh.kz'">
+      Открыть в приложении Halyk
     </button>
   </div>
 </body>
